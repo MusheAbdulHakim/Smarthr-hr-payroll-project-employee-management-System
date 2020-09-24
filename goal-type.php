@@ -2,9 +2,18 @@
 	session_start();
 	error_reporting(0);
 	include('includes/config.php');
+	include_once("includes/functions.php");
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
-	}
+	}elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+		$sql="DELETE from goal_type where id=:rid";
+		$query=$dbh->prepare($sql);
+		$query->bindParam(':rid',$rid,PDO::PARAM_STR);
+		$query->execute();
+		 echo "<script>alert('Goal Type deleted Successfully');</script>"; 
+		 echo "<script>window.location.href ='goal-type.php'</script>";
+	  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,45 +101,31 @@
 											<th class="text-right">Action</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM goal_type";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>Invoice Goal</td>
-											<td>Lorem ipsum dollar</td>
+											<td><?php echo $cnt; ?></td>
+											<td><?php echo htmlentities($row->Type); ?></td>
+											<td><?php echo htmlentities($row->Description); ?></td>
 											<td>
 												<div class="dropdown action-label">
+													<?php if($row->Status =="1") { ?>
 													<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
 														<i class="fa fa-dot-circle-o text-success"></i> Active
-													</a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_type"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_type"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Event Goal</td>
-											<td>Lorem ipsum dollar</td>
-											<td>
-												<div class="dropdown action-label">
-													<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+													</a> 
+													<?php }else{ ?><a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
 														<i class="fa fa-dot-circle-o text-danger"></i> Inactive
-													</a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
+													</a><?php }?>
 												</div>
 											</td>
 											<td class="text-right">
@@ -144,6 +139,7 @@
 											</td>
 										</tr>
 									</tbody>
+									<?php $cnt +=1; }} ?>
 								</table>
 							</div>
 						</div>

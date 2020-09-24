@@ -8,27 +8,28 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="form-group">
 										<label>Goal Type <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
+										<input required name="type" class="form-control" type="text">
 									</div>
 									<div class="form-group">
 										<label>Description <span class="text-danger">*</span></label>
-										<textarea class="form-control" rows="4"></textarea>
+										<textarea required name="description" class="form-control" rows="4"></textarea>
 									</div>
 									<div class="form-group">
 										<label class="col-form-label">Status</label>
-										<select class="select">
-											<option>Active</option>
-											<option>Inactive</option>
+										<select name="status" class="select">
+											<option value="1">Active</option>
+											<option value="0">Inactive</option>
 										</select>
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button type="submit" name="add_goal_type" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
+				
