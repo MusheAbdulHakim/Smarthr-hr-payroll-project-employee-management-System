@@ -1,9 +1,48 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
+	include_once("includes/functions.php");
 	include('includes/config.php');
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
+	}//code for deleting goal from the database
+	elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+	  $sql="DELETE from `goals` where id=:rid";
+	  $query=$dbh->prepare($sql);
+	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+	  $query->execute();
+	  echo "<script>alert('Goal deleted Successfully');</script>"; 
+	  echo "<script>window.location.href ='goal-tracking.php'</script>";
+	}
+	if(isset($_REQUEST['unconfirm']))
+	{
+	$aeid=intval($_GET['unconfirm']);
+	$memstatus=1;
+	$sql = "UPDATE goals SET Status=:status WHERE  id=:aeid";
+	$query = $dbh->prepare($sql);
+	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+	$query -> execute();
+	$msg= '
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	<strong>Congrants</strong> Alert <b class="alert-link">Changes Detected</b> Your Changes Has Been Saved.
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+	';
+	}
+
+	if(isset($_REQUEST['confirm']))
+	{
+	$aeid=intval($_GET['confirm']);
+	$memstatus=0;
+	$sql = "UPDATE goals SET Status=:status WHERE  id=:aeid";
+	$query = $dbh->prepare($sql);
+	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+	$query -> execute();
 	}
  ?>
 <!DOCTYPE html>
@@ -16,7 +55,6 @@
         <meta name="author" content="Dreamguys - Bootstrap Admin Template">
         <meta name="robots" content="noindex, nofollow">
         <title>Goal - HRMS admin template</title>
-		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 		
@@ -75,6 +113,7 @@
 									<li class="breadcrumb-item active">Goal Tracking</li>
 								</ul>
 							</div>
+							<?php echo $msg; ?>
 							<div class="col-auto float-right ml-auto">
 								<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_goal"><i class="fa fa-plus"></i> Add New</a>
 							</div>
@@ -100,29 +139,41 @@
 											<th class="text-right">Action</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM goals";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>Event Goal</td>
-											<td>Test Goal</td>
-											<td>Lorem ipsum dollar</td>
+											<td><?php echo $cnt; ?></td>
+											<td><?php echo htmlentities($row->Type);?></td>
+											<td><?php echo htmlentities($row->Subject);?></td>
+											<td><?php echo htmlentities($row->Target);?></td>
 											<td>
-												7 May 2019
+											<?php echo htmlentities($row->StartDate);?>
 											</td>
-											<td>10 May 2019</td>
-											<td>Lorem ipsum dollar</td>
-											<td>
-												<div class="dropdown action-label">
-													<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-														<i class="fa fa-dot-circle-o text-success"></i> Active
-													</a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
+											<td><?php echo htmlentities($row->EndDate);?></td>
+											<td><?php echo htmlentities($row->Description);?></td>
+											<td
+											<?php if($row->Status == 1)
+                                                    {?>
+												<a href="goal-tracking.php?confirm=<?php echo htmlentities($row->id);?>" onclick="return confirm('Do you really want to Un-Confirm the Goal?')">
+												<i class="fa fa-dot-circle-o text-success"></i> Active</a>
+												<?php } else {?>
+												<a href="goal-tracking.php?unconfirm=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Confirm the Goal?')">
+												<i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
+												<?php } ?>
 											</td>
-											<td><p class="mb-1">Completed 73%</p><div class="progress" style="height:5px"><div class="progress-bar bg-primary progress-sm" style="width: 73%;height:10px;"></div></div></td>
+											<td><p class="mb-1"><?php echo  "Completed ".htmlentities($row->Progress)."%"; ?></p><div class="progress" style="height:5px">
+											<div class="progress-bar bg-primary progress-sm" style="width: 73%;height:10px;"></div></div>
+											</td>
 											
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
@@ -134,8 +185,8 @@
 												</div>
 											</td>
 										</tr>
-										
 									</tbody>
+									<?php $cnt +=1; }} ?>
 								</table>
 							</div>
 						</div>

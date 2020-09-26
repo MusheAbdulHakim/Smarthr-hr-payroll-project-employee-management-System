@@ -1,9 +1,17 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
-	include('includes/config.php');
+	include_once('includes/config.php');
+	include_once('includes/functions.php');
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
+	}elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+	  $sql="DELETE from departments where id=:rid";
+	  $query=$dbh->prepare($sql);
+	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+	  $query->execute();
+	   echo "<script>alert('Department deleted Successfully');</script>"; 
 	}
  ?>
 <!DOCTYPE html>
@@ -87,75 +95,21 @@
 											<th class="text-right">Action</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM departments";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>Web Development</td>
-											<td class="text-right">
-                                            <div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_department"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_department"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Application Development</td>
-											<td class="text-right">
-                                            <div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_department"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_department"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>IT Management</td>
-											<td class="text-right">
-                                            <div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_department"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_department"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>Accounts Management</td>
-											<td class="text-right">
-                                            <div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_department"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_department"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>5</td>
-											<td>Support Management</td>
-											<td class="text-right">
-                                            <div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_department"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_department"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                </div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>Marketing</td>
+											<td><?php echo $cnt; ?></td>
+											<td><?php echo htmlentities($row->Department);?></td>
 											<td class="text-right">
                                             <div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -167,6 +121,9 @@
 											</td>
 										</tr>
 									</tbody>
+									<?php $cnt+=1; 
+								}
+								}?>
 								</table>
 							</div>
 						</div>

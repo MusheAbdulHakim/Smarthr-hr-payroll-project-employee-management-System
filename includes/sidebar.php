@@ -111,6 +111,9 @@
 							<li> 
 								<a href="settings.php"><i class="la la-cogs"></i> <span>Settings</span></a>
 							</li>
+							<li> 
+								<a href="logout.php"><i class="la la-power-off"></i> <span>Logout</span></a>
+							</li>
 									
 						</ul>
 					</div>

@@ -8,13 +8,13 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="form-group">
 										<label>Department Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
+										<input name="department" required class="form-control" type="text">
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button name="add_department" type="POST" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

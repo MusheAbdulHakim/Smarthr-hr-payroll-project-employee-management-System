@@ -1,3 +1,5 @@
+<?php $set = '1234567890';
+$id = substr(str_shuffle($set), 0, 6); ?>
 <div id="add_client" class="modal custom-modal fade" role="dialog">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
@@ -8,208 +10,80 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">First Name <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
+												<input name="firstname" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Last Name</label>
-												<input class="form-control" type="text">
+												<input name="lastname" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Username <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
+												<input name="username" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Email <span class="text-danger">*</span></label>
-												<input class="form-control floating" type="email">
+												<input name="email" required class="form-control floating" type="email">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Password</label>
-												<input class="form-control" type="password">
+												<input name="password" required class="form-control" type="password">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Confirm Password</label>
-												<input class="form-control" type="password">
+												<input name="confirmpass" required class="form-control" type="password">
 											</div>
 										</div>
 										<div class="col-md-6">  
 											<div class="form-group">
 												<label class="col-form-label">Client ID <span class="text-danger">*</span></label>
-												<input class="form-control floating" type="text">
+												<input name="clientid" value="<?php echo 'CLT-'.$id; ?>" readonly class="form-control floating" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Phone </label>
-												<input class="form-control" type="text">
+												<input name="phone" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Company Name</label>
-												<input class="form-control" type="text">
+												<input name="company" required class="form-control" type="text">
 											</div>
 										</div>
-									</div>
-									<div class="table-responsive m-t-15">
-										<table class="table table-striped custom-table">
-											<thead>
-												<tr>
-													<th>Module Permission</th>
-													<th class="text-center">Read</th>
-													<th class="text-center">Write</th>
-													<th class="text-center">Create</th>
-													<th class="text-center">Delete</th>
-													<th class="text-center">Import</th>
-													<th class="text-center">Export</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Projects</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Tasks</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Chat</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Estimates</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Invoices</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Timing Sheets</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="col-form-label">Address</label>
+												<input class="form-control" name="address" required type="text">
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="custom-file">
+												<label for="">Client Picture</label>
+												<input name="propic" type="file" class="custom-file-input" id="validatedCustomFile" required="">
+												<label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture...</label>
+												<div class="invalid-feedback">Example invalid custom file feedback</div>
+											</div>
+										</div>
+										
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button type="submit" name="add_client" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

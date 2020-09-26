@@ -8,61 +8,79 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label class="col-form-label">Goal Type</label>
-												<select class="select">
-													<option>Invoice Goal</option>
-													<option>Event Goal</option>
+												<select name="goal_type" class="select">
+													<option value="">Select Goal Type</option>
+												<?php 
+												$sql2 = "SELECT * from goal_type";
+												$query2 = $dbh -> prepare($sql2);
+												$query2->execute();
+												$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+												foreach($result2 as $row)
+												{          
+													?>  
+												<option value="<?php echo htmlentities($row->Type);?>">
+												<?php echo htmlentities($row->Type);?></option>
+												<?php } ?>
 												</select>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Subject</label>
-												<input class="form-control" type="text">
+												<input required name="subject" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Target Achievement</label>
-												<input class="form-control" type="text">
+												<input required name="target" class="form-control" type="text">
 											</div>
 										</div>
 										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label>Start Date <span class="text-danger">*</span></label>
-												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+												<label>Start Date </label>
+												<input required name="start_date" class="form-control " type="date">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>End Date <span class="text-danger">*</span></label>
-												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+												<input required name="end_date" class="form-control " type="date">
 											</div>
 										</div>
 										
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label>Description <span class="text-danger">*</span></label>
-												<textarea class="form-control" rows="4"></textarea>
+												<label>Description</label>
+												<textarea name="description" required class="form-control" rows="4"></textarea>
 											</div>
 										</div>
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label class="col-form-label">Status</label>
-												<select class="select">
-													<option>Active</option>
-													<option>Inactive</option>
+												<select name="status" class="select">
+													<option value="1">Active</option>
+													<option value="0">Inactive</option>
 												</select>
 											</div>
+
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label hidden class="col-form-label">Progress</label>
+													<input hidden name="progress" value="<?php echo floatval(0/100); ?>" class="form-control" type="text">
+												</div>
+											</div>
+											
 										</div>
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button type="submit" name="add_goal" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

@@ -1,9 +1,17 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
-	include('includes/config.php');
+	include_once('includes/config.php');
+	include_once("includes/functions.php");
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
+	}elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+	  $sql="DELETE from Clients where id=:rid";
+	  $query=$dbh->prepare($sql);
+	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+	  $query->execute();
+	   echo "<script>alert('Client deleted Successfully');</script>"; 
 	}
  ?>
 <!DOCTYPE html>
@@ -128,231 +136,32 @@
 											<th class="text-right">Action</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM clients";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
 											<td>
 												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-19.jpg" alt=""></a>
-													<a href="client-profile.php">Global Technologies</a>
+													<a href="client-profile.php" class="avatar"><img src="clients/<?php echo htmlentities($row->Picture); ?>" alt=""></a>
+													<a href="client-profile.php"><?php echo htmlentities($row->Company); ?></a>
 												</h2>
 											</td>
-											<td>CLT-0001</td>
-											<td>Barry Cuda</td>
-											<td>barrycuda@example.com</td>
-											<td>9876543210</td>
+											<td><?php echo htmlentities($row->ClientId); ?></td>
+											<td><?php echo htmlentities(($row->FirstName).' '.($row->LastName)); ?></td>
+											<td><?php echo htmlentities($row->Email); ?></td>
+											<td><?php echo htmlentities($row->Phone); ?></td>
 											<td>
 												<div class="dropdown action-label">
 													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-29.jpg" alt=""></a>
-													<a href="client-profile.php">Delta Infotech</a>
-												</h2>
-											</td>
-											<td>CLT-0002</td>
-											<td>Tressa Wexler</td>
-											<td>tressawexler@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-danger"></i> Inactive </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img alt="" src="assets/img/profiles/avatar-07.jpg"></a>
-													<a href="client-profile.php">Cream Inc</a>
-												</h2>
-											</td>
-											<td>CLT-0003</td>
-											<td>Ruby Bartlett</td>
-											<td>rubybartlett@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img alt="" src="assets/img/profiles/avatar-06.jpg"></a>
-													<a href="client-profile.php">Wellware Company</a>
-												</h2>
-											</td>
-											<td>CLT-0004</td>
-											<td>Misty Tison</td>
-											<td>mistytison@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-14.jpg" alt=""></a>
-													<a href="client-profile.php">Mustang Technologies</a>
-												</h2>
-											</td>
-											<td>CLT-0005</td>
-											<td>Daniel Deacon</td>
-											<td>danieldeacon@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-18.jpg" alt=""></a>
-													<a href="client-profile.php">International Software Inc</a>
-												</h2>
-											</td>
-											<td>CLT-0006</td>
-											<td>Walter Weaver</td>
-											<td>walterweaver@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-28.jpg" alt=""></a>
-													<a href="client-profile.php">Mercury Software Inc</a>
-												</h2>
-											</td>
-											<td>CLT-0007</td>
-											<td>Amanda Warren</td>
-											<td>amandawarren@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-													</div>
-												</div>
-											</td>
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 class="table-avatar">
-													<a href="client-profile.php" class="avatar"><img src="assets/img/profiles/avatar-22.jpg" alt=""></a>
-													<a href="client-profile.php">Carlson Tech</a>
-												</h2>
-											</td>
-											<td>CLT-0008</td>
-											<td>Betty Carlson</td>
-											<td>bettycarlson@example.com</td>
-											<td>9876543210</td>
-											<td>
-												<div class="dropdown action-label">
-													<a href="#" class="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o text-danger"></i> Inactive </a>
 													<div class="dropdown-menu">
 														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
 														<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
@@ -370,6 +179,10 @@
 											</td>
 										</tr>
 									</tbody>
+									<?php
+									 $cnt+=1; 
+									}
+									}?>
 								</table>
 							</div>
 						</div>

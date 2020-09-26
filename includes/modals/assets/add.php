@@ -88,7 +88,7 @@ $id = substr(str_shuffle($set), 0, 6); ?>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Value/Price</label>
-												<input placeholder="$1800" name="value"  class="form-control" type="text">
+												<input placeholder="1800" name="value"  class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-md-6">
