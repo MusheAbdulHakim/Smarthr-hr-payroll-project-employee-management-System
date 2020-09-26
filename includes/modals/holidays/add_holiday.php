@@ -8,17 +8,17 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="form-group">
 										<label>Holiday Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
+										<input name="holiday" class="form-control" required type="text">
 									</div>
 									<div class="form-group">
 										<label>Holiday Date <span class="text-danger">*</span></label>
-										<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
+										<input class="form-control" name="date" required type="date">
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button name="add_holiday" type="submit" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

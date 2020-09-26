@@ -213,7 +213,26 @@
         }else{
             echo "<script>alert('Something went wrong.');</script>";
         }
-    }
+    }//adding departments code ends here
+
+    //adding holidays starts here
+    elseif(isset($_POST['add_holiday'])){
+        $holiday_name = htmlspecialchars($_POST['holiday']);
+        $holiday_date = htmlspecialchars($_POST['date']);
+        $sql = "INSERT INTO holidays(Holiday_Name,Holiday_Date)VALUES(:name,:date)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':name',$holiday_name,PDO::PARAM_STR);
+        $query->bindParam(':date',$holiday_date,PDO::PARAM_STR);
+        $query->execute();
+        $lastInsert = $dbh->lastInsertId();
+        if($lastInsert>0){
+            echo "<script>alert('Holiday Has Been Added');</script>";
+            echo "<script>window.location.href='holidays.php';</script>";
+        }else{
+            echo "<script>alert('Something Went Wrong.');</script>";
+        }
+
+    }//adding holidays ends here
 
 
 
