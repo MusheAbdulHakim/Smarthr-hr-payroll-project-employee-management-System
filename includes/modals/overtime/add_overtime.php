@@ -8,32 +8,43 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="form-group">
 										<label>Select Employee <span class="text-danger">*</span></label>
-										<select class="select">
-											<option>-</option>
-											<option>John Doe</option>
-											<option>Richard Miles</option>
-											<option>John Smith</option>
+										<select require name="employee" class="select">
+											<option>Select Employee Name</option>
+											<?php 
+											$sql2 = "SELECT * from employees";
+											$query2 = $dbh -> prepare($sql2);
+											$query2->execute();
+											$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+											foreach($result2 as $row)
+											{          
+												?>  
+											<option value="<?php echo htmlentities($row->FirstName).' '.htmlentities($row->LastName); ?>">
+											<?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?></option>
+											<?php } ?> 
 										</select>
 									</div>
 									<div class="form-group">
 										<label>Overtime Date <span class="text-danger">*</span></label>
-										<div class="cal-icon">
-											<input class="form-control datetimepicker" type="text">
-										</div>
+										<input name="ov_date" required class="form-control " type="date">
 									</div>
 									<div class="form-group">
+										<label>Overtime Type <span class="text-danger">*</span></label>
+										<input name="ov_type" required class="form-control " type="text">
+									</div>
+
+									<div class="form-group">
 										<label>Overtime Hours <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
+										<input name="ov_hours" required class="form-control" type="text">
 									</div>
 									<div class="form-group">
 										<label>Description <span class="text-danger">*</span></label>
-										<textarea rows="4" class="form-control"></textarea>
+										<textarea name="description" required rows="4" class="form-control"></textarea>
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button name="add_overtime" type="submit" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

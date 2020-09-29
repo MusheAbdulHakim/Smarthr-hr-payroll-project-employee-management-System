@@ -1,10 +1,19 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
-	include('includes/config.php');
+	include_once('includes/config.php');
+	include_once("includes/functions.php");
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
-	}
+	}elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+		  $sql="DELETE from employees where id=:rid";
+		  $query=$dbh->prepare($sql);
+		  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+		  $query->execute();
+		  echo "<script>alert('Employee Has Been Deleted');</script>"; 
+		  echo "<script>window.location.href ='employees.php'</script>";
+			  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,14 +84,13 @@
 							<div class="col-auto float-right ml-auto">
 								<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
 								<div class="view-icons">
-									<a href="employees.php" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-									<a href="employees-list.php" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+									<a href="employees.php" title="Grid View" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+									<a href="employees-list.php" title="Tabular View" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- /Page Header -->
-					
 					<!-- Search Filter -->
 					<div class="row filter-row">
 						<div class="col-sm-6 col-md-3">  
@@ -112,14 +120,26 @@
 						<div class="col-sm-6 col-md-3">  
 							<a href="#" class="btn btn-success btn-block"> Search </a>  
 						</div>
-                    </div>
+     </div>
 					<!-- Search Filter -->
-					
+					<!-- user profiles list starts her -->
+
 					<div class="row staff-grid-row">
+						<?php
+										$sql = "SELECT * FROM employees";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
 							<div class="profile-widget">
 								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-02.jpg" alt=""></a>
+									<a href="profile.html" class="avatar"><img src="employees/<?php echo htmlentities($row->Picture); ?>" alt="picture"></a>
 								</div>
 								<div class="dropdown profile-action">
 									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -128,188 +148,17 @@
 										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 									</div>
 								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">John Doe</a></h4>
-								<div class="small text-muted">Web Designer</div>
+								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"><?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?></a></h4>
+								<div class="small text-muted"><?php echo htmlentities($row->Designation); ?></div>
 							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-09.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Richard Miles</a></h4>
-								<div class="small text-muted">Web Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-10.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">John Smith</a></h4>
-								<div class="small text-muted">Android Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-05.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Mike Litorus</a></h4>
-								<div class="small text-muted">IOS Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-11.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Wilmer Deluna</a></h4>
-								<div class="small text-muted">Team Leader</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-12.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Jeffrey Warden</a></h4>
-								<div class="small text-muted">Web Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-13.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Bernardo Galaviz</a></h4>
-								<div class="small text-muted">Web Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-01.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Lesley Grauer</a></h4>
-								<div class="small text-muted">Team Leader</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-16.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Jeffery Lalor</a></h4>
-								<div class="small text-muted">Team Leader</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-04.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Loren Gatlin</a></h4>
-								<div class="small text-muted">Android Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-03.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Tarah Shropshire</a></h4>
-								<div class="small text-muted">Android Developer</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="profile.php" class="avatar"><img src="assets/img/profiles/avatar-08.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-										<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-									</div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.php">Catherine Manseau</a></h4>
-								<div class="small text-muted">Android Developer</div>
-							</div>
-						</div>
+						</div>	
+						<?php $cnt +=1; 
+    }
+    } ?>					
 					</div>
-                </div>
+					
+    </div>
+    
 				<!-- /Page Content -->
 				
 				<!-- Add Employee Modal -->

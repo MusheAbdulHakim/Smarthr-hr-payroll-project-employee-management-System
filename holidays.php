@@ -12,6 +12,7 @@
 	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
 	  $query->execute();
 	   echo "<script>alert('Holiday deleted Successfully');</script>"; 
+	   echo "<scirpt>window.location.href='holidays.php';</script>";
 	}
  ?>
 <!DOCTYPE html>

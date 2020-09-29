@@ -6,14 +6,14 @@
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
 	}elseif (isset($_GET['delid'])) {
-	  $rid=intval($_GET['delid']);
+	$rid=intval($_GET['delid']);
 	  $sql="DELETE from assets where id=:rid";
 	  $query=$dbh->prepare($sql);
 	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
 	  $query->execute();
 	  echo "<script>alert('Asset Has Been Deleted');</script>"; 
 	  echo "<script>window.location.href ='assets.php'</script>";
-	}
+	  	}
  ?>
 <!DOCTYPE html>
 <html lang="en">

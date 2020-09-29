@@ -1,10 +1,19 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
-	include('includes/config.php');
+	include_once('includes/config.php');
+	include_once('includes/functions.php');
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
-	}
+	}elseif (isset($_GET['delid'])) {
+	$rid=intval($_GET['delid']);
+	  $sql="DELETE from overtime where id=:rid";
+	  $query=$dbh->prepare($sql);
+	  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+	  $query->execute();
+	  echo "<script>alert('Overtime Has Been Deleted');</script>"; 
+	  echo "<script>window.location.href ='overtime.php'</script>";
+	  	}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,37 +132,34 @@
 											<th class="text-center">OT Hours</th>
 											<th>OT Type</th>
 											<th>Description</th>
-											<th class="text-center">Status</th>
-											<th>Approved by</th>
+											
 											<th class="text-right">Actions</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM overtime";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
 											<td>1</td>
 											<td>
 												<h2 class="table-avatar blue-link">
-													<a href="profile.php" class="avatar"><img alt="" src="assets/img/profiles/avatar-02.jpg"></a>
-													<a href="profile.php">John Doe</a>
+													<!-- <a href="profile.php" class="avatar"><img alt="" src="employees/<?php //echo htmlentities($row->Picture); ?>"></a> -->
+													<a href="profile.php"><?php echo htmlentities($row->Employee) ;?></a>
 												</h2>
 											</td>
-											<td>8 Mar 2019</td>
-											<td class="text-center">2</td>
-											<td>Normal day OT 1.5x</td>
-											<td>Lorem ipsum dollar</td>
-											<td class="text-center">
-												<div class="action-label">
-													<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
-														<i class="fa fa-dot-circle-o text-purple"></i> New
-													</a>
-												</div>
-											</td>
-											<td>
-												<h2 class="table-avatar">
-													<a href="profile.php" class="avatar avatar-xs"><img src="assets/img/profiles/avatar-09.jpg" alt=""></a>
-													<a href="#">Richard Miles</a>
-												</h2>
-											</td>
+											<td><?php echo htmlentities($row->OverTime_Date); ?></td>
+											<td class="text-center"><?php echo htmlentities($row->Hours); ?></td>
+											<td><?php echo htmlentities($row->Type); ?></td>
+											<td><?php echo htmlentities($row->Description); ?></td>
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -165,11 +171,12 @@
 											</td>
 										</tr>
 									</tbody>
+									<?php $cnt +=1; }} ?>
 								</table>
 							</div>
 						</div>
 					</div>
-                </div>
+    </div>
 				<!-- /Page Content -->
 				
 				<!-- Add Overtime Modal -->

@@ -1,3 +1,5 @@
+<?php $set = '1234567890';
+$id = substr(str_shuffle($set), 0, 6); ?>
 <div id="add_employee" class="modal custom-modal fade" role="dialog">
 					<div class="modal-dialog modal-dialog-centered modal-lg">
 						<div class="modal-content">
@@ -8,91 +10,100 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST" enctype="multipart/form-data">
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">First Name <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
+												<input name="firstname" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Last Name</label>
-												<input class="form-control" type="text">
+												<input name="lastname" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Username <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
+												<input name="username" required class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Email <span class="text-danger">*</span></label>
-												<input class="form-control" type="email">
+												<input name="email" required class="form-control" type="email">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Password</label>
-												<input class="form-control" type="password">
+												<input class="form-control" required name="password" type="password">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Confirm Password</label>
-												<input class="form-control" type="password">
+												<input class="form-control" required name="confirm_pass" type="password">
 											</div>
 										</div>
 										<div class="col-sm-6">  
 											<div class="form-group">
 												<label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
-												<input type="text" class="form-control">
+												<input name="employee_id" readonly type="text" value="<?php echo 'EMP-'.$id; ?>" class="form-control">
 											</div>
 										</div>
-										<div class="col-sm-6">  
-											<div class="form-group">
-												<label class="col-form-label">Joining Date <span class="text-danger">*</span></label>
-												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
-											</div>
-										</div>
+										
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="col-form-label">Phone </label>
-												<input class="form-control" type="text">
+												<input name="phone" required class="form-control" type="text">
 											</div>
 										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label class="col-form-label">Company</label>
-												<select class="select">
-													<option value="">Global Technologies</option>
-													<option value="1">Delta Infotech</option>
-												</select>
-											</div>
-										</div>
+										
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Department <span class="text-danger">*</span></label>
-												<select class="select">
+												<select required name="department" class="select">
 													<option>Select Department</option>
-													<option>Web Development</option>
-													<option>IT Management</option>
-													<option>Marketing</option>
+													<?php 
+											$sql2 = "SELECT * from departments";
+											$query2 = $dbh -> prepare($sql2);
+											$query2->execute();
+											$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+											foreach($result2 as $row)
+											{          
+												?>  
+											<option value="<?php echo htmlentities($row->Department);?>">
+											<?php echo htmlentities($row->Department);?></option>
+											<?php } ?> 
 												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Designation <span class="text-danger">*</span></label>
-												<select class="select">
+												<select required name="designation" class="select">
 													<option>Select Designation</option>
-													<option>Web Designer</option>
-													<option>Web Developer</option>
-													<option>Android Developer</option>
+													<?php 
+											$sql2 = "SELECT * from designations";
+											$query2 = $dbh -> prepare($sql2);
+											$query2->execute();
+											$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+											foreach($result2 as $row)
+											{          
+												?>  
+											<option value="<?php echo htmlentities($row->Designation);?>">
+											<?php echo htmlentities($row->Designation);?></option>
+											<?php } ?> 
 												</select>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="col-form-label">Employee Picture</label>
+												<input class="form-control" required name="picture" type="file">
 											</div>
 										</div>
 									</div>

@@ -86,12 +86,19 @@
 								</div>
 							</div>
 						</div>
+						<?php 
+										$sql = "SELECT id from clients";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results = $query->fetchAll(PDO::FETCH_OBJ);
+										$totalcount = $query->rowCount();
+									?>
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 							<div class="card dash-widget">
 								<div class="card-body">
-									<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+									<span class="dash-widget-icon"><i class="fa fa-users"></i></span>
 									<div class="dash-widget-info">
-										<h3>44</h3>
+										<h3><?php echo $totalcount; ?></h3>
 										<span>Clients</span>
 									</div>
 								</div>

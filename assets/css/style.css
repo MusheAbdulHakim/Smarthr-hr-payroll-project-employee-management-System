@@ -1121,7 +1121,6 @@ table.dataTable thead > tr > td.sorting {
 -----------------------*/
 
 .header {
-	background: #ff9b44;
 	background: -moz-linear-gradient(left, #ff9b44 0%, #fc6075 100%);
 	background: -webkit-linear-gradient(left, #ff9b44 0%, #fc6075 100%);
 	background: -ms-linear-gradient(left, #ff9b44 0%, #fc6075 100%);
@@ -1143,6 +1142,12 @@ table.dataTable thead > tr > td.sorting {
 	background: linear-gradient(to right, #3f95ea 0%, #52d3aa 100%);
 	background: linear-gradient(to right, #3f95ea 0%, #52d3aa 100%);
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+	height: 60px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1002;
 }
 .header .header-left {
 	float: left;
