@@ -8,14 +8,22 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="form-group">
-										<label>Leave Type <span class="text-danger">*</span></label>
-										<select class="select">
-											<option>Select Leave Type</option>
-											<option>Casual Leave 12 Days</option>
-											<option>Medical Leave</option>
-											<option>Loss of Pay</option>
+										<label>Employee Leaving <span class="text-danger">*</span></label>
+										<select name="employee" class="select">
+										<option>Select Employee</option>
+										  <?php 
+											$sql2 = "SELECT * from employees";
+											$query2 = $dbh -> prepare($sql2);
+											$query2->execute();
+											$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+											foreach($result2 as $row)
+											{          
+												?>  
+											<option value="<?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?>">
+											<?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?></option>
+											<?php } ?> 
 										</select>
 									</div>
 									<div class="form-group">
@@ -32,18 +40,18 @@
 									</div>
 									<div class="form-group">
 										<label>Number of days <span class="text-danger">*</span></label>
-										<input class="form-control" readonly="" type="text">
+										<input class="form-control" type="number">
 									</div>
 									<div class="form-group">
 										<label>Remaining Leaves <span class="text-danger">*</span></label>
-										<input class="form-control" readonly="" value="12" type="text">
+										<input name="" class="form-control"  type="number">
 									</div>
 									<div class="form-group">
 										<label>Leave Reason <span class="text-danger">*</span></label>
-										<textarea rows="4" class="form-control"></textarea>
+										<textarea name="reason" rows="4" class="form-control"></textarea>
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
+										<button type="submit" name="add_leave" class="btn btn-primary submit-btn">Submit</button>
 									</div>
 								</form>
 							</div>

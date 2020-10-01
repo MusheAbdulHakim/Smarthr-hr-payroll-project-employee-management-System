@@ -21,9 +21,7 @@
 								<ul style="display: none;">
 									<li><a href="employees.php">All Employees</a></li>
 									<li><a href="holidays.php">Holidays</a></li>
-									<li><a href="leaves.php">Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span></a></li>
-									<li><a href="leaves-employee.php">Leaves (Employee)</a></li>
-									<li><a href="leave-settings.php">Leave Settings</a></li>
+									<li><a href="leaves-employee.php">Employee Leave</a></li>
 									<li><a href="departments.php">Departments</a></li>
 									<li><a href="designations.php">Designations</a></li>
 									<li><a href="timesheet.php">Timesheet</a></li>
