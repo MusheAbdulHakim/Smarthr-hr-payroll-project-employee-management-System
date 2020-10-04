@@ -28,24 +28,17 @@
 									</div>
 									<div class="form-group">
 										<label>From <span class="text-danger">*</span></label>
-										<div class="cal-icon">
-											<input class="form-control datetimepicker" type="text">
-										</div>
+										<input name="starting_at" class="form-control" type="text">
 									</div>
 									<div class="form-group">
 										<label>To <span class="text-danger">*</span></label>
-										<div class="cal-icon">
-											<input class="form-control datetimepicker" type="text">
-										</div>
+											<input name="ends_on" class="form-control " type="date">
 									</div>
 									<div class="form-group">
 										<label>Number of days <span class="text-danger">*</span></label>
-										<input class="form-control" type="number">
+										<input name="days_count" class="form-control" type="number">
 									</div>
-									<div class="form-group">
-										<label>Remaining Leaves <span class="text-danger">*</span></label>
-										<input name="" class="form-control"  type="number">
-									</div>
+									
 									<div class="form-group">
 										<label>Leave Reason <span class="text-danger">*</span></label>
 										<textarea name="reason" rows="4" class="form-control"></textarea>

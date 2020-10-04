@@ -127,7 +127,7 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Name</th>
+											<th>Employee Name</th>
 											<th>OT Date</th>
 											<th class="text-center">OT Hours</th>
 											<th>OT Type</th>

@@ -86,13 +86,13 @@
 					
 					<div class="account-box">
 						<div class="account-wrapper">
-							<h3 class="account-title">Login</h3>
-							<p class="account-subtitle">Access to your dashboard</p>
+							<h3 class="account-title">Admin Login</h3>
+							<p class="account-subtitle">Login to access to your dashboard</p>
 							
 							<!-- Account Form -->
 							<form method="POST" enctype="multipart/form-data">
 								<div class="form-group">
-									<label>UserName</label>
+									<label>User Name</label>
 									<input class="form-control" name="username" required type="text">
 								</div>
 								<?php if($wrongusername){echo $wrongusername;}?>

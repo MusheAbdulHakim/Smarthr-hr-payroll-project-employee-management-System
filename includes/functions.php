@@ -323,6 +323,32 @@
 			echo "<script>alert('Somthing Went Wrong');</script>";
 		}
 	}
+	//adding employees leave code starts here
+	elseif(isset($_POST['add_leave'])){
+		$employee = htmlspecialchars($_POST['employee']);
+		$start_date =htmlspecialchars( $_POST['starting_at']);
+		$end_date = htmlspecialchars($_POST['ends_on']);
+		$days_count = htmlspecialchars($_POST['days_count']);
+		$reason = htmlspecialchars($_POST['reason']);
+		$sql = "INSERT INTO `leaves` (`Employee`, `Starting_At`, `Ending_On`, `Days`, `Reason`, `Time_Added`)
+		 VALUES ( :employee, :start, :end, :days, :reason, current_timestamp())";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':employee',$employee,PDO::PARAM_STR);
+		$query->bindParam(':start',$start_date,PDO::PARAM_STR);
+		$query->bindParam(':end',$end_date,PDO::PARAM_STR);
+		$query->bindParam(':days',$days_count,PDO::PARAM_STR);
+		$query->bindParam(':reason',$reason,PDO::PARAM_STR);
+		$query->execute();
+		$lastInsert = $dbh->lastInsertId();
+		if($lastInsert>0){
+			echo "<script>alert('Employee Leave Has Been Added');</script>";
+			echo "<script>window.location.href='leaves-employee.php';</script>";
+		}else{
+			echo "<script>alert('Something went wrong');</script>";
+		}
+		
+
+	}
 
 
 

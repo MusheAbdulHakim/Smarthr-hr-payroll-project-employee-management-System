@@ -1,10 +1,19 @@
 ﻿<?php 
 	session_start();
 	error_reporting(0);
-	include('includes/config.php');
+	include_once('includes/config.php');
+	include_once("includes/functions.php");
 	if(strlen($_SESSION['userlogin'])==0){
 		header('location:login.php');
-	}
+	}elseif (isset($_GET['delid'])) {
+		$rid=intval($_GET['delid']);
+		  $sql="DELETE from leaves where id=:rid";
+		  $query=$dbh->prepare($sql);
+		  $query->bindParam(':rid',$rid,PDO::PARAM_STR);
+		  $query->execute();
+		  echo "<script>alert('Employee Leave Has Been Deleted');</script>"; 
+		  echo "<script>window.location.href ='leaves-employee.php'</script>";
+			  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,34 +91,7 @@
 					</div>
 					<!-- /Page Header -->
 					
-					<!-- Leave Statistics -->
-					<div class="row">
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Annual Leave</h6>
-								<h4>12</h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Medical Leave</h6>
-								<h4>3</h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Other Leave</h6>
-								<h4>4</h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Remaining Leave</h6>
-								<h4>5</h4>
-							</div>
-						</div>
-					</div>
-					<!-- /Leave Statistics -->
+					
 					
 					<div class="row">
 						<div class="col-md-12">
@@ -117,36 +99,33 @@
 								<table class="table table-striped custom-table mb-0 datatable">
 									<thead>
 										<tr>
-											<th>Leave Type</th>
+											<th>Employee</th>
 											<th>From</th>
 											<th>To</th>
 											<th>No of Days</th>
 											<th>Reason</th>
-											<th class="text-center">Status</th>
-											<th>Approved by</th>
 											<th class="text-right">Actions</th>
 										</tr>
 									</thead>
+									<?php
+										$sql = "SELECT * FROM leaves";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results=$query->fetchAll(PDO::FETCH_OBJ);
+										$cnt=1;
+										if($query->rowCount() > 0)
+										{
+										foreach($results as $row)
+										{	
+									?>
 									<tbody>
 										<tr>
-											<td>Casual Leave</td>
-											<td>8 Mar 2019</td>
-											<td>9 Mar 2019</td>
-											<td>2 days</td>
-											<td>Going to Hospital</td>
-											<td class="text-center">
-												<div class="action-label">
-													<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);">
-														<i class="fa fa-dot-circle-o text-purple"></i> New
-													</a>
-												</div>
-											</td>
-											<td>
-												<h2 class="table-avatar">
-													<a href="profile.php" class="avatar avatar-xs"><img src="assets/img/profiles/avatar-09.jpg" alt=""></a>
-													<a href="#">Richard Miles</a>
-												</h2>
-											</td>
+											<td><?php echo htmlentities($row->Employee);?></td>
+											<td><?php echo htmlentities($row->Starting_At);?></td>
+											<td><?php echo htmlentities($row->Ending_On);?></td>
+											<td><?php echo htmlentities($row->Days);?></td>
+											<td><?php echo htmlentities($row->Reason);?></td>
+											
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -159,6 +138,9 @@
 										</tr>
 										
 									</tbody>
+									<?php $cnt+=1;
+										}
+									}?>
 								</table>
 							</div>
 						</div>
