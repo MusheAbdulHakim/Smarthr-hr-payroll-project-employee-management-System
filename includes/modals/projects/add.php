@@ -8,7 +8,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form method="POST">
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
@@ -19,9 +19,19 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Client</label>
-												<select class="select">
-													<option>Global Technologies</option>
-													<option>Delta Infotech</option>
+												<select name="client" class="select">
+												<option>Select Clients</option>
+												<?php 
+													$sql2 = "SELECT * from clients";
+													$query2 = $dbh -> prepare($sql2);
+													$query2->execute();
+													$result2=$query2->fetchAll(PDO::FETCH_OBJ);
+													foreach($result2 as $row)
+													{          
+														?>  
+													<option value="<?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?>">
+													<?php echo htmlentities($row->FirstName)." ".htmlentities($row->LastName); ?></option>
+													<?php } ?> 
 												</select>
 											</div>
 										</div>
@@ -30,17 +40,13 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Start Date</label>
-												<div class="cal-icon">
-													<input class="form-control datetimepicker" type="text">
-												</div>
+												<input name="start_date" class="form-control" type="date">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>End Date</label>
-												<div class="cal-icon">
-													<input class="form-control datetimepicker" type="text">
-												</div>
+												<input name="end_date" class="form-control" type="date">
 											</div>
 										</div>
 									</div>
@@ -48,13 +54,13 @@
 										<div class="col-sm-3">
 											<div class="form-group">
 												<label>Rate</label>
-												<input placeholder="$50" class="form-control" type="text">
+												<input name="rate" placeholder="$50" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="col-sm-3">
 											<div class="form-group">
 												<label>&nbsp;</label>
-												<select class="select">
+												<select name="" class="select">
 													<option>Hourly</option>
 													<option>Fixed</option>
 												</select>

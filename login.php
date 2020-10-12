@@ -8,7 +8,7 @@
 		$_SESSION['userlogin'] = $_POST['username'];
 		$username = htmlspecialchars($_POST['username']);
 		$password = htmlspecialchars($_POST['password']);
-		$sql = "SELECT UserName,Password from users where UserName=:username";
+		$sql = "SELECT UserName,Password from tbladmin where UserName=:username";
 		$query = $dbh->prepare($sql);
 		$query->bindParam(':username',$username,PDO::PARAM_STR);
 		$query-> execute();
