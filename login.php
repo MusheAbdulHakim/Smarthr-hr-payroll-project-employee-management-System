@@ -8,7 +8,7 @@
 		$_SESSION['userlogin'] = $_POST['username'];
 		$username = htmlspecialchars($_POST['username']);
 		$password = htmlspecialchars($_POST['password']);
-		$sql = "SELECT UserName,Password from tbladmin where UserName=:username";
+		$sql = "SELECT UserName,Password from users where UserName=:username";
 		$query = $dbh->prepare($sql);
 		$query->bindParam(':username',$username,PDO::PARAM_STR);
 		$query-> execute();
@@ -52,7 +52,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
 		<meta name="author" content="Dreamguys - Bootstrap Admin Template">
 		<meta name="robots" content="noindex, nofollow">
-		<title>Login - HRMS admin template</title>
+		<title>Login - HRMS admin</title>
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -87,8 +87,6 @@
 					<div class="account-box">
 						<div class="account-wrapper">
 							<h3 class="account-title">Admin Login</h3>
-							<p class="account-subtitle">Login to access to your dashboard</p>
-							
 							<!-- Account Form -->
 							<form method="POST" enctype="multipart/form-data">
 								<div class="form-group">
@@ -116,9 +114,8 @@
 								</div>
 									
 								<div class="account-footer">
-									<p>Having Trouble? Contact Developer :musheabdulhakim@protonmail.ch</p>
+									<p>Having Trouble? report an issue on github <a target="https://github.com/MusheAbdulHakim/Smarthr---hr-payroll-project-employee-management-System/issues" href="https://github.com/MusheAbdulHakim/Smarthr---hr-payroll-project-employee-management-System/issues">Github issues</a></p>
 								</div>
-								
 							</form>
 							<!-- /Account Form -->
 							
