@@ -10,7 +10,7 @@
 
 #screenshots
 
-![ScreenShot](screenshots/login-page.png?raw=true "Login page")
+![ScreenShot](screenshots/login.png?raw=true "Login page")
 ![Dashboard](screenshots/dashboard.png?raw=true "Dashbaord page")
 ![Dashboard](screenshots/clients.png?raw=true "Clients page")
 ![Dashboard](screenshots/employees.png?raw=true "employees page")
