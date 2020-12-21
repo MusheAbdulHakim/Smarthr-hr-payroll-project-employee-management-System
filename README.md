@@ -8,4 +8,9 @@
 
 # a huge part of the project is still under development.most of it is still just html files and no backend has been added to it yet so feel free to fork it and contribute.And don't forget to star the repository.
 
+#screenshots
 
+![ScreenShot](screenshots/login-page.png?raw=true "Login page")
+![Dashboard](screenshots/dashboard.png?raw=true "Dashbaord page")
+![Dashboard](screenshots/clients.png?raw=true "Clients page")
+![Dashboard](screenshots/employees.png?raw=true "employees page")
