@@ -1,4 +1,4 @@
-<div class="header gradient">
+<div class="header">
 	<!-- Logo -->
 	<div class="header-left">
 		<a href="index.php" class="logo">
