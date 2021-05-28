@@ -13,7 +13,10 @@
  `username`: `Barry`
 `password` : `barry`
 
-# a huge part of the project is still under development.most of it is still just html files and no backend has been added to it yet so feel free to fork it and contribute.And don't forget to star the repository.
+# Note
+ 1. a huge part of the project is still under development.most of it is still just html files and no backend has been added to it yet so feel free to fork it and contribute.And don't forget to star the repository.
+
+ 2. I am currenty developing the laravel version of the application.It might even have more features.so check the dev branch and submit your pr.
 
 #screenshots
 
