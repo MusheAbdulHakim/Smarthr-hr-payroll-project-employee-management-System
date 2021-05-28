@@ -3,7 +3,7 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Main</span>
                 </li>
                 <li class="submenu">
@@ -32,26 +32,26 @@
                         <li><a href="file-manager.html">File Manager</a></li>
                     </ul>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Employees</span>
                 </li>
                 <li class="submenu">
                     <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="employees.html">All Employees</a></li>
-                        <li><a href="{{route('holidays')}}">Holidays</a></li>
+                        <li><a class="{{ Request::routeIs('holidays') ? 'active' : '' }}" href="{{route('holidays')}}">Holidays</a></li>
                         <li><a href="leaves.html">Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span></a></li>
                         <li><a href="leaves-employee.html">Leaves (Employee)</a></li>
                         <li><a href="leave-settings.html">Leave Settings</a></li>
                         <li><a href="attendance.html">Attendance (Admin)</a></li>
                         <li><a href="attendance-employee.html">Attendance (Employee)</a></li>
-                        <li><a href="{{route('departments')}}">Departments</a></li>
+                        <li><a class="{{ Request::routeIs('departments') ? 'active' : '' }}" href="{{route('departments')}}">Departments</a></li>
                         <li><a href="designations.html">Designations</a></li>
                         <li><a href="timesheet.html">Timesheet</a></li>
                         <li><a href="overtime.html">Overtime</a></li>
                     </ul>
                 </li>
-                <li> 
+                <li>
                     <a href="clients.html"><i class="la la-users"></i> <span>Clients</span></a>
                 </li>
                 <li class="submenu">
@@ -62,13 +62,13 @@
                         <li><a href="task-board.html">Task Board</a></li>
                     </ul>
                 </li>
-                <li> 
+                <li>
                     <a href="leads.html"><i class="la la-user-secret"></i> <span>Leads</span></a>
                 </li>
-                <li> 
+                <li>
                     <a href="tickets.html"><i class="la la-ticket"></i> <span>Tickets</span></a>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>HR</span>
                 </li>
                 <li class="submenu">
@@ -90,7 +90,7 @@
                         <li><a href="payroll-items.html"> Payroll Items </a></li>
                     </ul>
                 </li>
-                <li> 
+                <li>
                     <a href="policies.html"><i class="la la-file-pdf-o"></i> <span>Policies</span></a>
                 </li>
                 <li class="submenu">
@@ -100,7 +100,7 @@
                         <li><a href="invoice-reports.html"> Invoice Report </a></li>
                     </ul>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Performance</span>
                 </li>
                 <li class="submenu">
@@ -129,10 +129,10 @@
                 <li><a href="promotion.html"><i class="la la-bullhorn"></i> <span>Promotion</span></a></li>
                 <li><a href="resignation.html"><i class="la la-external-link-square"></i> <span>Resignation</span></a></li>
                 <li><a href="termination.html"><i class="la la-times-circle"></i> <span>Termination</span></a></li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Administration</span>
                 </li>
-                <li> 
+                <li>
                     <a href="assets.html"><i class="la la-object-ungroup"></i> <span>Assets</span></a>
                 </li>
                 <li class="submenu">
@@ -142,19 +142,19 @@
                         <li><a href="job-applicants.html"> Applied Candidates </a></li>
                     </ul>
                 </li>
-                <li> 
+                <li>
                     <a href="knowledgebase.html"><i class="la la-question"></i> <span>Knowledgebase</span></a>
                 </li>
-                <li> 
+                <li>
                     <a href="activities.html"><i class="la la-bell"></i> <span>Activities</span></a>
                 </li>
-                <li> 
+                <li>
                     <a href="users.html"><i class="la la-user-plus"></i> <span>Users</span></a>
                 </li>
-                <li> 
+                <li>
                     <a href="settings.html"><i class="la la-cog"></i> <span>Settings</span></a>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Pages</span>
                 </li>
                 <li class="submenu">
@@ -196,13 +196,13 @@
                         <li><a href="faq.html"> FAQ </a></li>
                         <li><a href="terms.html"> Terms </a></li>
                         <li><a href="privacy-policy.html"> Privacy Policy </a></li>
-                        <li><a class="active" href="blank-page.html"> Blank Page </a></li>
+                        <li><a  href="blank-page.html"> Blank Page </a></li>
                     </ul>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>UI Interface</span>
                 </li>
-                <li> 
+                <li>
                     <a href="components.html"><i class="la la-puzzle-piece"></i> <span>Components</span></a>
                 </li>
                 <li class="submenu">
@@ -223,13 +223,13 @@
                         <li><a href="data-tables.html">Data Table </a></li>
                     </ul>
                 </li>
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>Extras</span>
                 </li>
-                <li> 
+                <li>
                     <a href="#"><i class="la la-file-text"></i> <span>Documentation</span></a>
                 </li>
-                <li> 
+                <li>
                     <a href="javascript:void(0);"><i class="la la-info"></i> <span>Change Log</span> <span class="badge badge-primary ml-auto">v3.4</span></a>
                 </li>
                 <li class="submenu">

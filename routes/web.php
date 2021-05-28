@@ -52,6 +52,7 @@ Route::group(['middleware'=>['auth']], function (){
 
 });
 
-Route::get('/', function () {
-    //
+Route::get('file-manager', function () {
+    $title="file manager";
+    return view('backend.filemanager',compact('title'));
 });

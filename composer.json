@@ -6,12 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "alexusmai/laravel-file-manager": "^2.5",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "rachidlaasri/laravel-installer": "^4.1"
+        "rachidlaasri/laravel-installer": "^4.1",
+        "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
