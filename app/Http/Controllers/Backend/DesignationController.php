@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Department;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DepartmentController extends Controller
+class DesignationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $title = "Departments";
+        $title = "Designations";
+        $designations = Designation::get();
         $departments = Department::get();
-        return view('backend.departments',compact('title','departments'));
+        return view('backend.designations',compact('title','designations','departments'));
     }
 
     /**
@@ -28,9 +30,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['name'=>'required|max:100']);
-        Department::create($request->all());
-        return back()->with('success',"Department has been added successfully!!.");
+        $this->validate($request,[
+            'designation'=>'required|max:200',
+            'department'=>'required',
+        ]);
+        Designation::create([
+            'name'=>$request->designation,
+            'department_id'=>$request->department,
+        ]);
+        return back()->with('success','Designation added successfully!!!');
     }
 
     /**
@@ -51,14 +59,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $this->validate($request,['name'=>'required|max:100']);
-        $department = Department::find($request->id);
-        $department->update([
-            'name'=>$request->name,
-        ]);
-        return back()->with('success',"Holiday has been updated successfully!!.");
+        //
     }
 
     /**
@@ -69,8 +72,8 @@ class DepartmentController extends Controller
      */
     public function destroy(Request $request)
     {
-        $department = Department::find($request->id);
-        $department->delete();
-        return back()->with('success',"Holiday has been deleted successfully!!.");
+        $designation = Designation::find($request->id);
+        $designation->delete();
+        return back()->with('success',"Designation has been deleted successfully!!");
     }
 }

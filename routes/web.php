@@ -5,10 +5,14 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Backend\EventController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\HolidayController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DepartmentController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Backend\DesignationController;
+use App\Http\Controllers\Backend\FileManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +43,13 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('logout',[LogoutController::class,'index'])->name('logout');
 
+    //apps routes
+    Route::get('events',[EventController::class,'index'])->name('events');
+    Route::get('contacts',[ContactController::class,'index'])->name('contacts');
+    Route::post('contacts',[ContactController::class,'store']);
+    Route::delete('contacts',[ContactController::class,'destroy'])->name('contact.destroy');
+    Route::get('file-manager',[FileManagerController::class,'index'])->name('filemanager');
+
     Route::get('holidays',[HolidayController::class,'index'])->name('holidays');
     Route::post('holidays',[HolidayController::class,'store']);
     Route::post('holidays/{holiday}',[HolidayController::class,'completed'])->name('completed');
@@ -48,11 +59,17 @@ Route::group(['middleware'=>['auth']], function (){
 
     Route::get('departments',[DepartmentController::class,'index'])->name('departments');
     Route::post('departments',[DepartmentController::class,'store']);
+    Route::put('departments',[DepartmentController::class,'update']);
     Route::delete('departments',[DepartmentController::class,'destroy'])->name('department.destroy');
 
+    Route::get('designations',[DesignationController::class,'index'])->name('designations');
+    Route::post('designations',[DesignationController::class,'store']);
+    Route::delete('designations',[DesignationController::class,'destroy'])->name('designation.destroy');
+
 });
 
-Route::get('file-manager', function () {
-    $title="file manager";
-    return view('backend.filemanager',compact('title'));
+Route::get('',function (){
+    return redirect()->route('dashboard');
 });
+
+

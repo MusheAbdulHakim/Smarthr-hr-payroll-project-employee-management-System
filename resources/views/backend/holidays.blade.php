@@ -53,7 +53,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        <x-modals.delete :route="'holiday.destroy'" />
+                        <x-modals.delete :route="'holiday.destroy'" :title="'holiday'" />
                         <!-- Edit Holiday Modal -->
                         <div class="modal custom-modal fade" id="edit_holiday" role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">

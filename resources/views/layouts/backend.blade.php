@@ -24,6 +24,11 @@
 		<!-- Datetimepicker CSS -->
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
 
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="assets/css/select2.min.css">
+
+		@yield('styles')
+
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -44,7 +49,7 @@
 			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
-			
+				@yield('content_one')
 				<!-- Page Content -->
                 <div class="content container-fluid">
 					
@@ -100,6 +105,9 @@
 		<!-- Datetimepicker JS -->
 		<script src="assets/js/moment.min.js"></script>
 		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+
+		<!-- Select2 JS -->
+		<script src="assets/js/select2.min.js"></script>
 
         @yield('scripts')
 		<script>

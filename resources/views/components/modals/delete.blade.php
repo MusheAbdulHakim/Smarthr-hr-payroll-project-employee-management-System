@@ -1,11 +1,11 @@
-@props(['route'=>$route])
+@props(['route'=>$route,'title'=>$title])
 <!-- Delete Modal -->
 <div class="modal custom-modal fade" id="delete_modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="form-header">
-                    <h3>Delete Resource</h3>
+                    <h3>Delete {{ucfirst($title)}}</h3>
                     <p>Are you sure want to delete?</p>
                 </div>
                 <form action="{{route($route)}}" method="post">

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $title = "Departments";
-        $departments = Department::get();
-        return view('backend.departments',compact('title','departments'));
+        $title = 'events';
+        return view('backend.events',compact('title'));
     }
 
     /**
@@ -28,9 +26,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['name'=>'required|max:100']);
-        Department::create($request->all());
-        return back()->with('success',"Department has been added successfully!!.");
+        //
     }
 
     /**
@@ -51,14 +47,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $this->validate($request,['name'=>'required|max:100']);
-        $department = Department::find($request->id);
-        $department->update([
-            'name'=>$request->name,
-        ]);
-        return back()->with('success',"Holiday has been updated successfully!!.");
+        //
     }
 
     /**
@@ -67,10 +58,8 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $department = Department::find($request->id);
-        $department->delete();
-        return back()->with('success',"Holiday has been deleted successfully!!.");
+        //
     }
 }
