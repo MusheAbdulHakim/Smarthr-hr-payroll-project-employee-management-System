@@ -46,7 +46,7 @@
                                                     <input type="hidden" id="complete_id" name="id">
                                                 </form>
                                             @endif
-                                            <a data-id="{{$holiday->id}}" data-name="{{$holiday->name}}" data-date="{{$holiday->holiday_date}}" class="dropdown-item editbtn" href="#" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a data-id="{{$holiday->id}}" data-name="{{$holiday->name}}" data-date="{{$holiday->holiday_date}}" class="dropdown-item editbtn" href="javascript:void(0);" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a data-id="{{$holiday->id}}" class="dropdown-item deletebtn" href="javascript:void(0);" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                         </div>
                                     </div>
