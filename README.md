@@ -18,7 +18,7 @@
 
 # The whole project is under a complete rewrite.I am completely writing it with the laravel framework.with some new features.
 
-Check it out here -> https://github.com/MusheAbdulHakim/laravel-smart-hr
+
  
 #screenshots
 
