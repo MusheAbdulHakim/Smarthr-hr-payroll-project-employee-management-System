@@ -52,7 +52,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
 		<meta name="author" content="Dreamguys - Bootstrap Admin Template">
 		<meta name="robots" content="noindex, nofollow">
-		<title>Login - HRMS admin</title>
+		<title>Login - SmartHR admin</title>
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -108,13 +108,13 @@
 									<button class="btn btn-primary account-btn" name="login" type="submit">Login</button>
 										<div class="col-auto pt-2">
 											<a class="text-muted float-right" href="forgot-password.php">
-												Forgot password?
+												Esqueceu a Senha?
 											</a>
 										</div>
 								</div>
 									
 								<div class="account-footer">
-									<p>Having Trouble? report an issue on github <a target="https://github.com/MusheAbdulHakim/Smarthr---hr-payroll-project-employee-management-System/issues" href="https://github.com/MusheAbdulHakim/Smarthr---hr-payroll-project-employee-management-System/issues">Github issues</a></p>
+									<p>Problemas? reporte já o problema <a target="https://www.linkedin.com/in/david-sanculane-143b4141/" href="https://www.linkedin.com/in/david-sanculane-143b4141/">Help</a></p>
 								</div>
 							</form>
 							<!-- /Account Form -->

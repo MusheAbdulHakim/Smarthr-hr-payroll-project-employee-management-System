@@ -15,7 +15,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
         <meta name="author" content="Dreamguys - Bootstrap Admin Template">
         <meta name="robots" content="noindex, nofollow">
-        <title>Employee Profile - HRMS admin template</title>
+        <title>Employee Profile - SmartHR admin template</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -93,11 +93,11 @@
 											<div class="row">
 												<div class="col-md-5">
 													<div class="profile-info-left">
-														<h3 class="user-name m-t-0 mb-0">John Doe</h3>
-														<h6 class="text-muted">UI/UX Design Team</h6>
-														<small class="text-muted">Web Designer</small>
-														<div class="staff-id">Employee ID : FT-0001</div>
-														<div class="small doj text-muted">Date of Join : 1st Jan 2013</div>
+														<h3 class="user-name m-t-0 mb-0">David Sanculane</h3>
+														<h6 class="text-muted">Engenheiro de Software</h6>
+														<small class="text-muted">Developer</small>
+														<div class="staff-id">Employee ID : 53003934</div>
+														<div class="small doj text-muted">Date of Join : 16th Mar 2018</div>
 														<div class="staff-msg"><a class="btn btn-custom" href="chat.php">Send Message</a></div>
 													</div>
 												</div>
@@ -105,19 +105,19 @@
 													<ul class="personal-info">
 														<li>
 															<div class="title">Phone:</div>
-															<div class="text"><a href="">9876543210</a></div>
+															<div class="text"><a href="">+258843215766</a></div>
 														</li>
 														<li>
 															<div class="title">Email:</div>
-															<div class="text"><a href="">johndoe@example.com</a></div>
+															<div class="text"><a href="">david.sanculane@mota-engil.co.mz</a></div>
 														</li>
 														<li>
 															<div class="title">Birthday:</div>
-															<div class="text">24th July</div>
+															<div class="text">6th Jan</div>
 														</li>
 														<li>
 															<div class="title">Address:</div>
-															<div class="text">1861 Bayonne Ave, Manchester Township, NJ, 08759</div>
+															<div class="text">Cidade de Tete</div>
 														</li>
 														<li>
 															<div class="title">Gender:</div>
@@ -132,7 +132,7 @@
 																  </div>
 															   </div>
 															   <a href="profile.php">
-																	Jeffery Lalor
+																	Paulo Silva
 																</a>
 															</div>
 														</li>
@@ -183,15 +183,15 @@
 												</li>
 												<li>
 													<div class="title">Nationality</div>
-													<div class="text">Indian</div>
+													<div class="text">Moçambicana</div>
 												</li>
 												<li>
 													<div class="title">Religion</div>
-													<div class="text">Christian</div>
+													<div class="text">Cristão</div>
 												</li>
 												<li>
 													<div class="title">Marital status</div>
-													<div class="text">Married</div>
+													<div class="text">Casado</div>
 												</li>
 												<li>
 													<div class="title">Employment of spouse</div>
@@ -213,11 +213,11 @@
 											<ul class="personal-info">
 												<li>
 													<div class="title">Name</div>
-													<div class="text">John Doe</div>
+													<div class="text">Cacilda Maxwell</div>
 												</li>
 												<li>
 													<div class="title">Relationship</div>
-													<div class="text">Father</div>
+													<div class="text">Esposa</div>
 												</li>
 												<li>
 													<div class="title">Phone </div>
@@ -229,11 +229,11 @@
 											<ul class="personal-info">
 												<li>
 													<div class="title">Name</div>
-													<div class="text">Karen Wills</div>
+													<div class="text">Luisa A.</div>
 												</li>
 												<li>
 													<div class="title">Relationship</div>
-													<div class="text">Brother</div>
+													<div class="text">Mae</div>
 												</li>
 												<li>
 													<div class="title">Phone </div>

@@ -17,7 +17,7 @@
 	
 	<!-- Header Title -->
 	<div class="page-title-box">
-		<h3>Dreamguy's Technologies</h3>
+		<h3>RH Smart</h3>
 	</div>
 	<!-- /Header Title -->
 	
@@ -61,7 +61,7 @@
 										<img alt="" src="assets/img/profiles/avatar-02.jpg">
 									</span>
 									<div class="media-body">
-										<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+										<p class="noti-details"><span class="noti-title">David Sanculane</span> added new task <span class="noti-title">Patient appointment booking</span></p>
 										<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
 									</div>
 								</div>
